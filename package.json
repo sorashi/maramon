@@ -12,6 +12,7 @@
     "request": "^2.88.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "nodemon": "nodemon index.js"
   }
 }
