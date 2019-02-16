@@ -1,0 +1,17 @@
+{
+  "name": "maramon",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/sorashi/maramon.git",
+  "author": "Dennis Prazak",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "phash-im": "^1.0.1",
+    "request": "^2.88.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
