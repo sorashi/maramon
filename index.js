@@ -1,4 +1,4 @@
-const request = require('request').defaults({	encoding: null })
+const request = require('request').defaults({ encoding: null })
 const fs = require('fs')
 
 const Discord = require('discord.js')
