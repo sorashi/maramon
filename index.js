@@ -11,11 +11,6 @@ const channelId = '543814442132045835'
 
 client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag}!`)
-  // var msg = await client.channels.get('543814442132045835').fetchMessage('546375655839891456')
-  // let url = msg.embeds[0].image.url
-  // request(url).pipe(fs.createWriteStream('temp.jpg')).on('close', async () => {
-  //   msg.channel.send(`p!catch ${await recognizePokemon()}`)
-  // })
 })
 
 async function recognizePokemon () {
