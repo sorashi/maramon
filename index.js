@@ -54,7 +54,34 @@ async function handleRetrogradeRecognition (id, channel) {
 var spamInterval = null
 
 function startSpam (channel) {
-  let words = [ 'hello', 'hi', 'greetings', 'good day to you', 'welcome, traveler!' ]
+  let words = [
+    'hi there',
+    'howdy',
+    'greetings',
+    "hey, what's up",
+    "what's going on",
+    'hey!',
+    "how's everything",
+    'how are things?',
+    'good to see you',
+    'nice to see you',
+    'great to see you',
+    "what's happening",
+    "how's it going",
+    'hey, boo',
+    'how are you?',
+    'nice to meet you!',
+    'long time no see',
+    "what's the good word?",
+    "what's new?",
+    'look who it is!',
+    'how have you been?',
+    'nice to see you again',
+    'how are you doing today?',
+    'what have you been up to?',
+    'how are you feeling today?',
+    'look what the cat dragged in!'
+  ]
   function randomWord () {
     let index = Math.floor(Math.random() * words.length)
     return words[index]
