@@ -32,7 +32,7 @@ async function recognizePokemon () {
   return name
 }
 
-client.on('message', msg => {
+client.on('message', async msg => {
   if (msg.channel.id === channelId && msg.author.id === pokecordId) {
     console.log('Message form Pokécord', msg.embeds.length)
     if (msg.embeds.length > 0) console.log(msg.embeds[0].title)
@@ -42,6 +42,29 @@ client.on('message', msg => {
       request(url).pipe(fs.createWriteStream('temp.jpg')).on('close', async () => {
         msg.channel.send(`p!catch ${await recognizePokemon()}`)
       })
+    }
+  }
+
+  if (msg.channel.id === channelId && msg.author.id === client.user.id) {
+    let r = /^\.mm\s+(\d+)/.exec(msg.content)
+    if (r === null) return
+    console.log('.mm command issued')
+    await msg.delete()
+    let msgId = r[1]
+    let fetched = null
+    try {
+      fetched = await msg.channel.fetchMessage(msgId)
+    } catch (e) {
+      msg.channel.send('Could not fetch message ' + msgId).then(m => setTimeout(() => m.delete(), 4000))
+      return
+    }
+    try {
+      let url = fetched.embeds[0].image.url
+      request(url).pipe(fs.createWriteStream('temp.jpg')).on('close', async () => {
+        msg.channel.send(`p!catch ${await recognizePokemon()}`)
+      })
+    } catch (e) {
+      msg.channel.send('It seems that message is not a wild Pokémon.').then(m => setTimeout(() => m.delete(), 4000))
     }
   }
 })
