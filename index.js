@@ -139,7 +139,7 @@ client.on('message', async msg => {
       await handleRetrogradeRecognition(r[1], msg.channel)
       return
     }
-    r = /^.spam/.test(msg.content)
+    r = /^\.spam/.test(msg.content)
     if (r) {
       msg.delete()
       if (spamInterval === null) startSpam(msg.channel)
