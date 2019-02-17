@@ -13,6 +13,13 @@
   },
   "scripts": {
     "start": "node index.js",
-    "nodemon": "nodemon index.js"
+    "nodemon": "nodemon index.js",
+    "deploy:obfuscate": "javascript-obfuscator index.js --compact true --self-defending true --control-flow-flattening true --dead-code-injection true --rename-globals true --debug-protection true --string-array true --rotate-string-array true --string-array-encoding rc4 --string-array-threshold 1 --unicode-escape-sequence false --target node --output deploy/index.js",
+    "deploy:copy": "for %I in (package.json convert.bat pokemon.bin) do copy %I deploy",
+    "deploy:encrypt": "node encryptjson.js",
+    "deploy": "yarn deploy:obfuscate && yarn deploy:encrypt && yarn deploy:copy"
+  },
+  "devDependencies": {
+    "javascript-obfuscator": "^0.18.1"
   }
 }

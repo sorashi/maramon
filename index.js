@@ -1,13 +1,39 @@
 const request = require('request').defaults({ encoding: null })
 const fs = require('fs')
+const crypto = require('crypto')
 
 const Discord = require('discord.js')
 const client = new Discord.Client()
 const phash = require('phash-im')
-const hashes = require('./pokemon.json')
 
 const pokecordId = '365975655608745985'
 const channelId = '543814442132045835'
+
+function decryptPokemon () {
+  return new Promise(function (resolve, reject) {
+    const key = crypto.scryptSync('*$tXMs7uZFL2am7B!itWD$bVXA%WTQ', 'salt_9158246', 24)
+    const iv = Buffer.alloc(16, 0)
+    const decipher = crypto.createDecipheriv('aes-192-cbc', key, iv)
+    let decrypted = ''
+    decipher.on('readable', () => {
+      let chunk
+      while ((chunk = decipher.read()) !== null) {
+        decrypted += chunk.toString('utf8')
+      }
+    })
+    decipher.on('end', () => {
+      resolve(decrypted)
+    })
+    const input = fs.createReadStream('pokemon.bin')
+    input.pipe(decipher)
+  })
+}
+
+// warning: race condition
+var hashes = []
+decryptPokemon().then(x => {
+  hashes = JSON.parse(x)
+})
 
 client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag}!`)

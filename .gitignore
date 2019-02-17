@@ -128,3 +128,5 @@ notes.txt
 image_fetcher/result/
 image_fetcher/result.json
 temp.jpg
+deploy/
+pokemon.bin
